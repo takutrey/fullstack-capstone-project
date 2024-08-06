@@ -2,10 +2,8 @@ import React, { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import {urlConfig} from '../../config';
 import { useAppContext } from '../../context/AuthContext';
-
 export default function Navbar() {
     const { isLoggedIn, setIsLoggedIn, userName, setUserName } = useAppContext();
-
   const navigate=useNavigate();
     useEffect(() => {
         const authTokenFromSession = sessionStorage.getItem('auth-token');
@@ -27,7 +25,6 @@ export default function Navbar() {
         sessionStorage.removeItem('email');
         setIsLoggedIn(false);
         navigate(`/app`);
-
     }
     const profileSecton=()=>{
       navigate(`/app/profile`);
@@ -36,11 +33,9 @@ export default function Navbar() {
         <>
             <nav className="navbar navbar-expand-lg navbar-light bg-light" id='navbar_container'>
         <a className="navbar-brand" href={`${urlConfig.backendUrl}/app`}>GiftLink</a>
-
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
-
         <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item">
@@ -61,7 +56,6 @@ export default function Navbar() {
                                     )  : (
                                     <>
                                         <li className="nav-item">
-
                                         <Link className="nav-link login-btn" to="/app/login">Login</Link>
                                         </li>
                                         <li className="nav-item">
@@ -69,7 +63,6 @@ export default function Navbar() {
                                         </li>
                                     </>
                                 )
-
                                 }
             </ul>
           </ul>

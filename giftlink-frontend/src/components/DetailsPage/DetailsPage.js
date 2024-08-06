@@ -2,21 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './DetailsPage.css';
 import {urlConfig} from '../../config';
-
 function DetailsPage() {
     const navigate = useNavigate();
     const { productId } = useParams();
     const [gift, setGift] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
     useEffect(() => {
         const authenticationToken = sessionStorage.getItem('auth-token');
         if (!authenticationToken) {
             // Task 1: Check for authentication and redirect
             navigate('/app/login');
         }
-
         // get the gift to be rendered on the details page
         const fetchGift = async () => {
             try {
@@ -34,19 +31,14 @@ function DetailsPage() {
                 setLoading(false);
             }
         };
-
         fetchGift();
-
         // Task 3: Scroll to top on component mount
         window.scrollTo(0, 0);
-
     }, [productId, navigate]);
-
     const handleBackClick = () => {
         // Task 4: Handle back click
         navigate(-1);
     };
-
     //The comments have been hardcoded for this project.
     const comments = [
         {
@@ -70,11 +62,9 @@ function DetailsPage() {
             comment: "My family can use one. DM me if it is still available. Thank you!"
         }
     ];
-
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
     if (!gift) return <div>Gift not found</div>;
-
     return (
         <div className="container mt-5">
             <button className="btn btn-secondary mb-3" onClick={handleBackClick}>Back</button>
@@ -124,5 +114,4 @@ function DetailsPage() {
         </div>
     );
 }
-
 export default DetailsPage;

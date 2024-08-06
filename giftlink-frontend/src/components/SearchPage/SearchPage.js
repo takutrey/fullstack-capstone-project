@@ -2,14 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {urlConfig} from '../../config';
-
 function SearchPage() {
     const [searchQuery, setSearchQuery] = useState('');
     const [ageRange, setAgeRange] = useState(6); // Initialize with minimum value
     const [searchResults, setSearchResults] = useState([]);
     const categories = ['Living', 'Bedroom', 'Bathroom', 'Kitchen', 'Office'];
     const conditions = ['New', 'Like New', 'Older'];
-
     useEffect(() => {
         // fetch all products
         const fetchProducts = async () => {
@@ -27,11 +25,8 @@ function SearchPage() {
                 console.log('Fetch error: ' + error.message);
             }
         };
-
         fetchProducts();
     }, []);
-
-
     const handleSearch = async () => {
         // Construct the search URL based on user input
         const baseUrl = `${urlConfig.backendUrl}/api/search?`;
@@ -41,7 +36,6 @@ function SearchPage() {
             category: document.getElementById('categorySelect').value,
             condition: document.getElementById('conditionSelect').value,
         }).toString();
-
         try {
             const response = await fetch(`${baseUrl}${queryParams}`);
             if (!response.ok) {
@@ -53,13 +47,10 @@ function SearchPage() {
             console.error('Failed to fetch search results:', error);
         }
     };
-
     const navigate = useNavigate();
-
     const goToDetailsPage = (productId) => {
         navigate(`/app/product/${productId}`);
     };
-
     return (
         <div className="container mt-5">
             <div className="row justify-content-center">
@@ -75,7 +66,6 @@ function SearchPage() {
                                     <option key={category} value={category}>{category}</option>
                                 ))}
                             </select>
-
                             {/* Condition Dropdown */}
                             <label htmlFor="conditionSelect">Condition</label>
                             <select id="conditionSelect" className="form-control my-1">
@@ -84,7 +74,6 @@ function SearchPage() {
                                     <option key={condition} value={condition}>{condition}</option>
                                 ))}
                             </select>
-
                             {/* Age Range Slider */}
                             <label htmlFor="ageRange">Less than {ageRange} years</label>
                             <input
@@ -98,7 +87,6 @@ function SearchPage() {
                             />
                         </div>
                     </div>
-
                     <input
                         type="text"
                         className="form-control mb-2"
@@ -135,5 +123,4 @@ function SearchPage() {
         </div>
     );
 }
-
 export default SearchPage;
