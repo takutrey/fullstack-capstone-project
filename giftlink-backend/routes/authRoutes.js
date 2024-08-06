@@ -1,3 +1,4 @@
+/*jshint esversion: 8 */
 const express = require('express');
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -55,7 +56,7 @@ router.post('/register', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-    console.log("\n\n Inside login")
+    console.log("\n\n Inside login");
 
     try {
         // const collection = await connectToDatabase();
